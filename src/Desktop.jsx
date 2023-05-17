@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import  { RefObject } from "react";
-
+import { RefObject } from "react";
 import TopBar from "~/components/menus/TopBar";
 import Dock from "~/components/dock/Dock";
 import Launchpad from "~/components/Launchpad";
 import Window from "~/components/Window";
 import Spotlight from "~/components/Spotlight";
-import  apps  from "~/configs/apps";
-import  wallpapers  from "~/configs/wallpapers";
+import apps from "~/configs/apps";
+import wallpapers from "~/configs/wallpapers";
 import { useStore } from "~/stores";
 
 const minMarginY = 32;
@@ -22,14 +21,14 @@ export default function Desktop(props) {
     showLaunchpad: false,
     currentTitle: "Finder",
     hideDockAndTopbar: false,
-    spotlight: false
-  } );
+    spotlight: false,
+  });
 
   const [spotlightBtnRef, setSpotlightBtnRef] = useState(null);
 
   const { dark, brightness } = useStore((state) => ({
     dark: state.dark,
-    brightness: state.brightness
+    brightness: state.brightness,
   }));
 
   const getAppsData = () => {
@@ -41,19 +40,19 @@ export default function Desktop(props) {
     apps.forEach((app) => {
       showApps = {
         ...showApps,
-        [app.id]: app.show
+        [app.id]: app.show,
       };
       appsZ = {
         ...appsZ,
-        [app.id]: 2
+        [app.id]: 2,
       };
       maxApps = {
         ...maxApps,
-        [app.id]: false
+        [app.id]: false,
       };
       minApps = {
         ...minApps,
-        [app.id]: false
+        [app.id]: false,
       };
     });
 
@@ -103,7 +102,7 @@ export default function Desktop(props) {
     setState({
       ...state,
       maxApps: maxApps,
-      hideDockAndTopbar: target
+      hideDockAndTopbar: target,
     });
   };
 
@@ -113,7 +112,7 @@ export default function Desktop(props) {
     minApps[id] = target;
     setState({
       ...state,
-      minApps: minApps
+      minApps: minApps,
     });
   };
 
@@ -145,7 +144,7 @@ export default function Desktop(props) {
     setState({
       ...state,
       showApps: showApps,
-      hideDockAndTopbar: false
+      hideDockAndTopbar: false,
     });
   };
 
@@ -172,7 +171,7 @@ export default function Desktop(props) {
       showApps: showApps,
       appsZ: appsZ,
       maxZ: maxZ,
-      currentTitle: currentApp.title
+      currentTitle: currentApp.title,
     });
 
     const minApps = state.minApps;
@@ -206,7 +205,7 @@ export default function Desktop(props) {
           close: closeApp,
           setMax: setAppMax,
           setMin: minimizeApp,
-          focus: openApp
+          focus: openApp,
         };
 
         return (
@@ -225,20 +224,11 @@ export default function Desktop(props) {
       className="w-full h-full overflow-hidden bg-center bg-cover"
       style={{
         backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`,
-        filter: `brightness( ${(brightness) * 0.7 + 50}% )`
+        filter: `brightness( ${brightness * 0.7 + 50}% )`,
       }}
     >
       {/* Top Menu Bar */}
-      <TopBar
-        title={state.currentTitle}
-        setLogin={props.setLogin}
-        shutMac={props.shutMac}
-        sleepMac={props.sleepMac}
-        restartMac={props.restartMac}
-        toggleSpotlight={toggleSpotlight}
-        hide={state.hideDockAndTopbar}
-        setSpotlightBtnRef={setSpotlightBtnRef}
-      />
+      <TopBar setLogin={props.setLogin} />
 
       {/* Desktop Apps */}
       <div className="window-bound z-10 absolute" style={{ top: minMarginY }}>

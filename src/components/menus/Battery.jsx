@@ -18,9 +18,12 @@ export default function Battery() {
   return (
     <div className="hstack space-x-2">
       <span className="text-xs">{(batteryState.level * 100).toFixed()}%</span>
-      <div className="relative hstack">
+      <div className="relative hstack ml-2">
         <span className="i-bi:battery text-2xl" />
-        <div className={`battery-level ${color()}`} style={{ width: `${width()}rem` }} />
+        <div
+          className={`battery-level ${color()}`}
+          style={{ width: `${width()}rem` }}
+        />
         {batteryState.charging && (
           <span className="i-bi:lightning-charge-fill text-xs absolute top-1/2 -mt-1.5 left-0 ml-1" />
         )}
