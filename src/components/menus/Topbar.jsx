@@ -4,7 +4,10 @@ import format from "date-fns/format";
 import Battery from "./Battery";
 import { useInterval } from "~/hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TopBarItem = forwardRef((props, ref) => {
   const hide = props.hideOnMobile ? "hidden sm:inline-flex" : "inline-flex";
@@ -41,6 +44,12 @@ const TopBar = (props) => {
     });
   }, 60 * 1000);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+    console.log("logout");
+  };
+
   return (
     <div
       className={`w-full h-8 px-2 fixed top-0 hstack justify-between ${
@@ -50,17 +59,18 @@ const TopBar = (props) => {
       <div className="hstack space-x-1">
         <TopBarItem className="font-semibold px-2">
           {/* {props.title} */}
+          <FontAwesomeIcon icon={faUser} style={{ color: "#47fc00" }} />
           <span>@Username</span>
         </TopBarItem>
       </div>
 
       <div className="hstack flex-row justify-end space-x-2">
         <TopBarItem>
-          <div onClick={{}}>
+          <div onClick={() => handleLogout()}>
             <span className="mx-2">Logout</span>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
-              style={{ color: "#183153" }}
+              style={{ color: "#0f0b49" }}
             />
           </div>
         </TopBarItem>

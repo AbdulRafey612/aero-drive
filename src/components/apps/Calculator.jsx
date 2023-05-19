@@ -21,7 +21,7 @@ const ButtonBox = ({ children }) => {
 const Button = ({ className, value, onClick }) => {
   return (
     <button className={className} onClick={onClick}>
-      <Textfit>{value}</Textfit>
+      <h6>{value}</h6>
     </button>
   );
 };

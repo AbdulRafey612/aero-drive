@@ -1,5 +1,5 @@
 const wallpapers = {
-  day: "img/ui/wallpaper-day.jpg",
+  day: "img/ui/lighthouse.jpg",
   night: "img/ui/wallpaper-white.jpg",
 };
 

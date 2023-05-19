@@ -228,7 +228,12 @@ export default function Desktop(props) {
       }}
     >
       {/* Top Menu Bar */}
-      <TopBar setLogin={props.setLogin} />
+      <TopBar
+        setLogin={props.setLogin}
+        toggleSpotlight={toggleSpotlight}
+        hide={state.hideDockAndTopbar}
+        setSpotlightBtnRef={setSpotlightBtnRef}
+      />
 
       {/* Desktop Apps */}
       <div className="window-bound z-10 absolute" style={{ top: minMarginY }}>
