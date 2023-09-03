@@ -1,15 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula, prism } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useStore } from "~/stores";
 import bear from "~/configs/bear";
 
 const Highlighter = (dark) => {
-
   return {
     code({ node, inline, className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || "");
@@ -25,7 +20,7 @@ const Highlighter = (dark) => {
       ) : (
         <code className={className}>{children}</code>
       );
-    }
+    },
   };
 };
 
@@ -99,66 +94,71 @@ const Middlebar = ({ items, cur, setContent }) => {
   );
 };
 
-const getRepoURL = (url) => {
-  return url.slice(0, -10) + "/";
-};
-
-const fixImageURL = (text, contentURL) => {
-  text = text.replace(/&nbsp;/g, "");
-  if (contentURL.indexOf("raw.githubusercontent.com") !== -1) {
-    const repoURL = getRepoURL(contentURL);
-
-    const imgReg = /!\[(.*?)\]\((.*?)\)/;
-    const imgRegGlobal = /!\[(.*?)\]\((.*?)\)/g;
-
-    const imgList = text.match(imgRegGlobal);
-
-    if (imgList) {
-      for (const img of imgList) {
-        const imgURL = (img.match(imgReg))[2];
-        if (imgURL.indexOf("http") !== -1) continue;
-        const newImgURL = repoURL + imgURL;
-        text = text.replace(imgURL, newImgURL);
-      }
-    }
-  }
-  return text;
-};
-
 const Content = ({ contentID, contentURL }) => {
   const [storeMd, setStoreMd] = useState({});
   const dark = useStore((state) => state.dark);
 
-  const fetchMarkdown = useCallback(
-    (id, url) => {
-      if (!storeMd[id]) {
-        fetch(url)
-          .then((response) => response.text())
-          .then((text) => {
-            storeMd[id] = fixImageURL(text, url);
-            setStoreMd({ ...storeMd });
-          })
-          .catch((error) => console.error(error));
-      }
-    },
-    [storeMd]
-  );
-
-  useEffect(() => {
-    fetchMarkdown(contentID, contentURL);
-  }, [contentID, contentURL, fetchMarkdown]);
-
   return (
     <div className="markdown w-full h-full c-text-700 bg-gray-50 dark:bg-gray-800 overflow-scroll py-6">
       <div className="w-2/3 px-2 mx-auto">
-        <ReactMarkdown
-          linkTarget="_blank"
-          remarkPlugins={[remarkGfm, remarkMath]}
-          rehypePlugins={[rehypeKatex]}
-          components={Highlighter(dark)}
-        >
-          {storeMd[contentID]}
-        </ReactMarkdown>
+        <h1>
+          <span style={{ color: "red" }}> Aero</span>
+          <span>Drive</span>
+        </h1>
+        <p>
+          <b>AERODRIVE</b> – an innovative and cutting-edge solution that
+          revolutionizes the way you store, access, and interact with your
+          files, apps, and games. Puter is a privacy-first personal cloud
+          computer designed to provide you with a seamless and secure
+          experience, all within the confines of your own private space.
+        </p>
+        <p>
+          Moreover, AeroDrive's versatility extends to its compatibility with
+          various devices and operating systems. Whether you prefer Windows,
+          macOS, Linux, or even mobile platforms, Puter ensures a consistent
+          user experience across all your devices. Effortlessly switch from your
+          desktop computer to your smartphone or tablet, and experience the same
+          level of functionality and convenience. But AeroDrive is more than
+          just a device or a service; it represents a paradigm shift in how we
+          interact with our digital lives.
+        </p>
+        <p>
+          Welcome to a world where your files, apps, and games find solace
+          within the confines of your personal cloud computer – AERODRIVE.{" "}
+        </p>
+        <h2>Description of services</h2>
+        <p>
+          AeroDrive is a cloud operating system that allows its users (each, a
+          “User” and collectively “Users”) to upload, store, process, and share
+          data, files, personal information, messages, pictures, and other
+          materials (collectively, your “User Data”). You can also search,
+          preview, sort and personalize your User Data.
+        </p>
+        <h2>Your Account</h2>
+        <p>
+          You can access the Services by creating a permanent account (a
+          "Permanent Account") by registering your email and creating a
+          password. You may also access the Services without registering a
+          Permanent Account by way of a temporary session (a "Temporary
+          Session"). However, users accessing the Services by way of a Temporary
+          Session will not have access to the full range of Services and their
+          User Data is removed from the Platform after the Temporary Session is
+          closed. In consideration of your use of the Services, you hereby agree
+          to: (a) provide true, accurate, current and complete information about
+          yourself as requested by any registration forms on the Service (the
+          “Registration Data”); and (b) maintain and promptly update the
+          Registration Data to keep it true, accurate, current and complete.
+        </p>
+        <h2> FeedBack</h2>
+        <p>
+          While we are continually working to develop and evaluate our own
+          product ideas and features, we also pay attention to the interests,
+          feedback, comments, and suggestions we receive from our user
+          community. If you choose to contribute by sending us any ideas for our
+          Services or other products (collectively, “Feedback”), then regardless
+          of what your accompanying communication may say, in order to avoid any
+          misunderstandings the following terms will apply to the Feedback.{" "}
+        </p>
       </div>
     </div>
   );
@@ -170,7 +170,7 @@ const Bear = () => {
     curMidbar: 0,
     midbarList: bear[0].md,
     contentID: bear[0].md[0].id,
-    contentURL: bear[0].md[0].file
+    contentURL: bear[0].md[0].file,
   });
 
   const setMidBar = (items, index) => {
@@ -179,7 +179,7 @@ const Bear = () => {
       curMidbar: 0,
       midbarList: items,
       contentID: items[0].id,
-      contentURL: items[0].file
+      contentURL: items[0].file,
     });
   };
 
@@ -188,7 +188,7 @@ const Bear = () => {
       ...state,
       curMidbar: index,
       contentID: id,
-      contentURL: url
+      contentURL: url,
     });
   };
 

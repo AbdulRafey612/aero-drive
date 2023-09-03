@@ -20,7 +20,7 @@ export default function Desktop(props) {
     minApps: {},
     maxZ: 2,
     showLaunchpad: false,
-    currentTitle: "Finder",
+    currentTitle: "Good Day",
     hideDockAndTopbar: false,
     spotlight: false
   } );

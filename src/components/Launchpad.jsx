@@ -1,6 +1,6 @@
 import { useState } from "react";
-import  wallpapers   from "~/configs/wallpapers";
-import  launchpadApps  from "~/configs/launchpad";
+import wallpapers from "~/configs/wallpapers";
+import launchpadApps from "~/configs/launchpad";
 import { useStore } from "~/stores";
 
 const placeholderText = "Search";
@@ -16,20 +16,23 @@ export default function Launchpad({ show, toggleLaunchpad }) {
     const text = searchText.toLowerCase();
     const list = launchpadApps.filter((item) => {
       return (
-        item.title.toLowerCase().includes(text) || item.id.toLowerCase().includes(text)
+        item.title.toLowerCase().includes(text) ||
+        item.id.toLowerCase().includes(text)
       );
     });
     return list;
   };
 
-  const close = show ? "" : "opacity-0 invisible transition-opacity duration-200";
+  const close = show
+    ? ""
+    : "opacity-0 invisible transition-opacity duration-200";
 
   return (
     <div
       className={`${close} z-30 transform scale-110 w-full h-full fixed overflow-hidden bg-center bg-cover`}
       id="launchpad"
       style={{
-        backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`
+        backgroundImage: `url(${dark ? wallpapers.night : wallpapers.day})`,
       }}
       onClick={() => toggleLaunchpad(false)}
     >
@@ -62,7 +65,10 @@ export default function Launchpad({ show, toggleLaunchpad }) {
           grid="flow-row cols-4 sm:cols-7"
         >
           {search().map((app) => (
-            <div key={`launchpad-${app.id}`} className="h-32 sm:h-36 w-full flex-center">
+            <div
+              key={`launchpad-${app.id}`}
+              className="h-32 sm:h-36 w-full flex-center"
+            >
               <div className="h-full w-full flex flex-col">
                 <a
                   className="h-max"
