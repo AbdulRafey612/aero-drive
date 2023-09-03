@@ -1,5 +1,5 @@
 import { useMotionValue } from "framer-motion";
-import  apps from "~/configs/apps";
+import apps from "~/configs/apps";
 import { useStore } from "~/stores";
 import DockItem from "./DockItem";
 
@@ -8,11 +8,11 @@ export default function Dock({
   showApps,
   showLaunchpad,
   toggleLaunchpad,
-  hide
+  hide,
 }) {
   const { dockSize, dockMag } = useStore((state) => ({
     dockSize: state.dockSize,
-    dockMag: state.dockMag
+    dockMag: state.dockMag,
   }));
 
   const openApp = (id) => {
@@ -37,7 +37,7 @@ export default function Dock({
         onMouseMove={(e) => mouseX.set(e.nativeEvent.x)}
         onMouseLeave={() => mouseX.set(null)}
         style={{
-          height: `${(dockSize) + 15}px`
+          height: `${dockSize + 15}px`,
         }}
       >
         {apps.map((app) => (

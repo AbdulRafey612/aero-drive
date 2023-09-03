@@ -1,5 +1,11 @@
-import { DetailsView, FileManagerComponent,  NavigationPane, Toolbar, Inject  } from '@syncfusion/ej2-react-filemanager';
-import { registerLicense } from '@syncfusion/ej2-base';
+import {
+  DetailsView,
+  FileManagerComponent,
+  NavigationPane,
+  Toolbar,
+  Inject,
+} from "@syncfusion/ej2-react-filemanager";
+import { registerLicense } from "@syncfusion/ej2-base";
 import React, { Component } from "react";
 import "../../../public/styles/Finder.css";
 let userId = localStorage.getItem('user');

@@ -11,7 +11,6 @@ import {
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
-
 import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 import axios from "axios";
 
@@ -226,6 +225,23 @@ export default function Login(props) {
           }
         });
     }
+    axios
+      .post("http://localhost:5000/users/signup", formData)
+      .then((response) => {
+        console.log(response.data);
+        if (response.status == 200) {
+          handleLogInClick();
+          localStorage.setItem("token", response.data.token);
+        } else {
+          setSign("** Incorrect data !");
+        }
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data); // => the response payload
+          setSign("** Incorrect password or email !");
+        }
+      });
   };
 
   return (
